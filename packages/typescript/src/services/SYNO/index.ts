@@ -7,6 +7,7 @@ import { SYNO_CloudSync } from "$/services/SYNO/CloudSync"
 import { SYNO_Entry } from "$/services/SYNO/Entry"
 import { SYNO_FileStation } from "$/services/SYNO/FileStation"
 import { SYNO_Finder } from "$/services/SYNO/Finder"
+import { SYNO_ResourceMonitor } from "$/services/SYNO/ResourceMonitor"
 
 export class SYNO {
   constructor(private client: Client) {}
@@ -41,5 +42,9 @@ export class SYNO {
 
   get Finder() {
     return new SYNO_Finder(this.client)
+  }
+
+  get ResourceMonitor() {
+    return new SYNO_ResourceMonitor(this.client)
   }
 }

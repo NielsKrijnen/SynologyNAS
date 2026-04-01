@@ -930,6 +930,35 @@ export const registry: Registry = {
               }
             }
           }
+        },
+        ResourceMonitor: {
+          apis: {
+            Setting: {
+              methods: {
+                get: {
+                  1: {
+                    response: {
+                      type: "object",
+                      items: {
+                        enable_history: { type: "boolean" }
+                      }
+                    }
+                  }
+                },
+                set: {
+                  1: {
+                    respond: false,
+                    params: {
+                      type: "object",
+                      items: {
+                        enable_history: { type: "boolean" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
