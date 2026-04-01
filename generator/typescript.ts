@@ -10,7 +10,8 @@ import {
   type SourceFile,
   StructureKind
 } from "ts-morph"
-import { type Definition, type Property, registry } from "../config/types.ts"
+import { registry } from "../config/registry"
+import type { Definition, Property } from "../config/types"
 
 const base = path.join(__dirname, "..", "packages", "typescript")
 
