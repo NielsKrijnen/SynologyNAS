@@ -622,6 +622,26 @@ export const registry: Registry = {
             }
           }
         },
+        Core: {
+          apis: {
+            AppNotify: {
+              methods: {
+                view: {
+                  1: {
+                    respond: false,
+                    params: {
+                      type: "object",
+                      optional: true,
+                      items: {
+                        app: { type: "string", optional: true }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         Entry: {
           apis: {
             Request: {

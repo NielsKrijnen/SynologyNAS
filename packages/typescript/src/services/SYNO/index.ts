@@ -4,6 +4,7 @@ import { SYNO_API } from "$/services/SYNO/API"
 import { SYNO_Auth } from "$/services/SYNO/Auth"
 import { SYNO_Backup } from "$/services/SYNO/Backup"
 import { SYNO_CloudSync } from "$/services/SYNO/CloudSync"
+import { SYNO_Core } from "$/services/SYNO/Core"
 import { SYNO_Entry } from "$/services/SYNO/Entry"
 import { SYNO_FileStation } from "$/services/SYNO/FileStation"
 import { SYNO_Finder } from "$/services/SYNO/Finder"
@@ -32,6 +33,10 @@ export class SYNO {
 
   get CloudSync() {
     return new SYNO_CloudSync(this.client)
+  }
+
+  get Core() {
+    return new SYNO_Core(this.client)
   }
 
   get Entry() {
