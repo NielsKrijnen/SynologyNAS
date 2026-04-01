@@ -639,6 +639,114 @@ export const registry: Registry = {
                   }
                 }
               }
+            },
+            AppPortal: {
+              apis: {
+                AccessControl: {
+                  methods: {
+                    list: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            entries: { type: "array", items: { type: "unknown" } }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                Config: {
+                  methods: {
+                    get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            show_titlebar: { type: "boolean" }
+                          }
+                        }
+                      }
+                    },
+                    set: {
+                      1: {
+                        respond: false,
+                        params: {
+                          type: "object",
+                          optional: true,
+                          items: {
+                            show_titlebar: { type: "boolean", optional: true }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                ReverseProxy: {
+                  methods: {
+                    list: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            entries: { type: "array", items: { type: "unknown" } }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              methods: {
+                list: {
+                  2: {
+                    params: {
+                      type: "object",
+                      optional: true,
+                      items: {
+                        additional: {
+                          type: "array",
+                          optional: true,
+                          items: { type: "enum", items: ["default_setting"] }
+                        }
+                      }
+                    },
+                    response: {
+                      type: "object",
+                      items: {
+                        portal: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            items: {
+                              additional: {
+                                type: "object",
+                                optional: true,
+                                items: {
+                                  default_setting: {
+                                    type: "object",
+                                    optional: true,
+                                    items: {
+                                      alias: { type: "string" },
+                                      fqdn: { type: "string" },
+                                      hsts: { type: "boolean" },
+                                      http_port: { type: "integer" },
+                                      https_port: { type: "integer" }
+                                    }
+                                  }
+                                }
+                              },
+                              display_name: { type: "string" },
+                              enable_redirect: { type: "boolean" },
+                              id: { type: "string" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         },
