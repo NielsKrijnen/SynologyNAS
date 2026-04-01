@@ -9,6 +9,7 @@ import { SYNO_FileStation } from "$/services/SYNO/FileStation"
 import { SYNO_Finder } from "$/services/SYNO/Finder"
 import { SYNO_ResourceMonitor } from "$/services/SYNO/ResourceMonitor"
 import { SYNO_SecureSignIn } from "$/services/SYNO/SecureSignIn"
+import { SYNO_SecurityAdvisor } from "$/services/SYNO/SecurityAdvisor"
 
 export class SYNO {
   constructor(private client: Client) {}
@@ -51,5 +52,9 @@ export class SYNO {
 
   get SecureSignIn() {
     return new SYNO_SecureSignIn(this.client)
+  }
+
+  get SecurityAdvisor() {
+    return new SYNO_SecurityAdvisor(this.client)
   }
 }

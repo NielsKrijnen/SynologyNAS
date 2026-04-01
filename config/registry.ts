@@ -1015,6 +1015,21 @@ export const registry: Registry = {
               }
             }
           }
+        },
+        SecurityAdvisor: {
+          apis: {
+            Conf: {
+              apis: {
+                Location: {
+                  methods: {
+                    get: {
+                      1: {}
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
