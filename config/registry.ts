@@ -747,6 +747,67 @@ export const registry: Registry = {
                   }
                 }
               }
+            },
+            BackgroundTask: {
+              methods: {
+                get: {
+                  1: {
+                    response: {
+                      type: "object",
+                      items: {
+                        task_conf_time: {
+                          type: "object",
+                          items: {
+                            nsec: { type: "integer" },
+                            sec: { type: "integer" }
+                          }
+                        },
+                        task_data_time: {
+                          type: "object",
+                          items: {
+                            nsec: { type: "integer" },
+                            sec: { type: "integer" }
+                          }
+                        },
+                        task_groups: {
+                          type: "object",
+                          additionalProperties: {
+                            type: "object",
+                            items: {
+                              belong_tray: { type: "string" },
+                              custom_tray_tooltip: { type: "string" },
+                              enable_tray_tooltip: { type: "boolean" },
+                              functions: {
+                                type: "object",
+                                additionalProperties: {
+                                  type: "object",
+                                  items: {
+                                    action_privileges: { type: "array", items: { type: "string" } },
+                                    allow_users: { type: "array", items: { type: "unknown" } },
+                                    application_privileges: { type: "array", items: { type: "unknown" } },
+                                    i18n: { type: "string" },
+                                    read_only_config: { type: "boolean" },
+                                    system_slice: { type: "string" },
+                                    tasks: { type: "object", additionalProperties: { type: "unknown" } },
+                                    ui_component: { type: "string" }
+                                  }
+                                }
+                              },
+                              i18n: { type: "string" },
+                              icon_class: { type: "string" },
+                              icon_path: { type: "string" },
+                              is_tray: { type: "boolean" },
+                              read_only_config: { type: "boolean" },
+                              tray_groups: { type: "array", items: { type: "unknown" } },
+                              tray_icon_class: { type: "string" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         },

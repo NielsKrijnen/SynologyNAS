@@ -11,6 +11,7 @@
       <w>isdir</w>
       <w>mlock</w>
       <w>myds</w>
+      <w>nsec</w>
       <w>quickconnect</w>
       <w>synotifyd</w>
       <w>synotoken</w>

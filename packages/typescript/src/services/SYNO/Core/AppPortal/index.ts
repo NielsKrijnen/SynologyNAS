@@ -1,6 +1,7 @@
 import type { Client } from "$/client"
 import { SYNO_Core_AppPortal_AccessControl } from "$/services/SYNO/Core/AppPortal/AccessControl"
 import { SYNO_Core_AppPortal_Config } from "$/services/SYNO/Core/AppPortal/Config"
+import { SYNO_Core_AppPortal_ReverseProxy } from "$/services/SYNO/Core/AppPortal/ReverseProxy"
 
 export class SYNO_Core_AppPortal {
   constructor(private client: Client) {}
@@ -15,6 +16,10 @@ export class SYNO_Core_AppPortal {
 
   get Config() {
     return new SYNO_Core_AppPortal_Config(this.client)
+  }
+
+  get ReverseProxy() {
+    return new SYNO_Core_AppPortal_ReverseProxy(this.client)
   }
 }
 
