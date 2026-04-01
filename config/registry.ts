@@ -959,6 +959,62 @@ export const registry: Registry = {
               }
             }
           }
+        },
+        SecureSignIn: {
+          apis: {
+            AMFA: {
+              apis: {
+                Policy: {
+                  methods: {
+                    get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            type: { type: "string" },
+                            group_list: { type: "string" },
+                            user_list: { type: "string" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            Method: {
+              methods: {
+                get: {
+                  1: {
+                    response: {
+                      type: "object",
+                      items: {
+                        auth_type: { type: "array", items: { type: "unknown" } },
+                        mode: { type: "string" },
+                        status: { type: "string" },
+                        time: { type: "integer" }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            Package: {
+              methods: {
+                get: {
+                  1: {
+                    response: {
+                      type: "object",
+                      items: {
+                        account_status: { type: "boolean" },
+                        enabled: { type: "boolean" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

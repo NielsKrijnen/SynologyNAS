@@ -8,6 +8,7 @@ import { SYNO_Entry } from "$/services/SYNO/Entry"
 import { SYNO_FileStation } from "$/services/SYNO/FileStation"
 import { SYNO_Finder } from "$/services/SYNO/Finder"
 import { SYNO_ResourceMonitor } from "$/services/SYNO/ResourceMonitor"
+import { SYNO_SecureSignIn } from "$/services/SYNO/SecureSignIn"
 
 export class SYNO {
   constructor(private client: Client) {}
@@ -46,5 +47,9 @@ export class SYNO {
 
   get ResourceMonitor() {
     return new SYNO_ResourceMonitor(this.client)
+  }
+
+  get SecureSignIn() {
+    return new SYNO_SecureSignIn(this.client)
   }
 }
