@@ -192,6 +192,10 @@ function writeType(writer: CodeBlockWriter, property: Property) {
     writer.write("string")
   } else if (property.type === "boolean") {
     writer.write("boolean")
+  } else if (property.type === "unknown") {
+    writer.write("unknown")
+  } else if (property.type === "null") {
+    writer.write("null")
   } else if (property.type === "integer" || property.type === "float") {
     writer.write("number")
   } else if (property.type === "binary") {
@@ -202,6 +206,14 @@ function writeType(writer: CodeBlockWriter, property: Property) {
     writer.write(")[]")
   } else if (property.type === "enum") {
     writer.write(property.items.map(item => `"${item}"`).join(" | "))
+  } else if (property.type === "options") {
+    writer.write("(")
+    for (const item of property.items) {
+      const i = property.items.indexOf(item)
+      writeType(writer, item)
+      if (i !== property.items.length - 1) writer.write(" | ")
+    }
+    writer.writeLine(")")
   } else if (property.type === "object") {
     if (property.items && property.additionalProperties) {
       writer.write("{ ")

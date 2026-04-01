@@ -3,11 +3,20 @@
     <words>
       <w>cipherkey</w>
       <w>ciphertoken</w>
+      <w>cppjieba</w>
       <w>displayname</w>
       <w>getinfo</w>
+      <w>heic</w>
+      <w>isdir</w>
+      <w>mlock</w>
+      <w>myds</w>
       <w>quickconnect</w>
+      <w>synotifyd</w>
       <w>synotoken</w>
       <w>tsup</w>
+      <w>usergrp</w>
+      <w>vmtouch</w>
+      <w>xattr</w>
     </words>
   </dictionary>
 </component>

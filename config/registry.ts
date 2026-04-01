@@ -447,6 +447,489 @@ export const registry: Registry = {
               }
             }
           }
+        },
+        Backup: {
+          apis: {
+            Config: {
+              apis: {
+                AutoBackup: {
+                  methods: {
+                    get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            enable: { type: "boolean" },
+                            enc_method: { type: "string" },
+                            last_status: { type: "string" },
+                            myds_account: { type: "string" },
+                            pwd: { type: "string" }
+                          }
+                        }
+                      }
+                    },
+                    status: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            last_status: { type: "string" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                Backup: {
+                  methods: {
+                    list: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            services: {
+                              type: "array",
+                              items: {
+                                type: "object",
+                                items: {
+                                  field: { type: "string" },
+                                  id: { type: "string" },
+                                  text: { type: "string" }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    start: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            task_id: { type: "string" }
+                          }
+                        }
+                      }
+                    },
+                    status: {
+                      1: {
+                        params: {
+                          type: "object",
+                          items: {
+                            task_id: { type: "string" }
+                          }
+                        },
+                        response: {
+                          type: "object",
+                          items: {
+                            finish: { type: "boolean" },
+                            task_id: { type: "string" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        CloudSync: {
+          methods: {
+            list_conn: {
+              1: {
+                params: {
+                  type: "object",
+                  optional: true,
+                  items: {
+                    is_tray: { type: "boolean", optional: true },
+                    group_by: { type: "enum", items: ["group_by_user"], optional: true }
+                  }
+                },
+                response: {
+                  type: "object",
+                  items: {
+                    conn: {
+                      type: "array",
+                      items: { type: "unknown" }
+                    },
+                    is_admin_mode: { type: "boolean" },
+                    is_pause: { type: "boolean" },
+                    notification: {
+                      type: "options",
+                      items: [
+                        {
+                          type: "object",
+                          items: {
+                            file_count: { type: "integer" }
+                          }
+                        },
+                        { type: "null" }
+                      ]
+                    },
+                    total: { type: "integer" },
+                    tray_status: {
+                      type: "enum",
+                      items: ["suspended"]
+                    }
+                  }
+                }
+              }
+            },
+            get_available_clouds: {
+              1: {
+                response: {
+                  type: "object",
+                  items: {
+                    available_clouds: {
+                      type: "array",
+                      items: { type: "unknown" }
+                    }
+                  }
+                }
+              }
+            },
+            get_config: {
+              1: {
+                response: {
+                  type: "object",
+                  items: {
+                    admin_mode: { type: "enum", items: ["enable"] },
+                    log_count: { type: "integer" },
+                    repo_vol_path: { type: "string" },
+                    sync_mode: { type: "boolean" },
+                    volume_count: { type: "integer" },
+                    volume_list: {
+                      type: "array",
+                      items: {
+                        type: "object",
+                        items: {
+                          desc: { type: "string" },
+                          display: { type: "string" },
+                          mount_point: { type: "string" },
+                          size_free: { type: "string" },
+                          size_total: { type: "string" },
+                          value: { type: "string" },
+                          vol_desc: { type: "string" }
+                        }
+                      }
+                    },
+                    worker_count: { type: "integer" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        Entry: {
+          apis: {
+            Request: {
+              methods: {
+                request: {
+                  1: {
+                    params: {
+                      type: "object",
+                      items: {
+                        stop_when_error: { type: "boolean" },
+                        mode: { type: "enum", items: ["sequential"] },
+                        compound: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            items: {
+                              api: { type: "string" },
+                              method: { type: "string" },
+                              version: { type: "integer" }
+                            },
+                            additionalProperties: {
+                              type: "options",
+                              items: [{ type: "string" }, { type: "integer" }, { type: "boolean" }]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        FileStation: {
+          apis: {
+            Favorite: {
+              methods: {
+                list: {
+                  2: {
+                    params: {
+                      type: "object",
+                      optional: true,
+                      items: {
+                        filetype: { type: "enum", items: ["dir"], optional: true },
+                        sort_by: { type: "enum", items: ["name"], optional: true },
+                        check_dir: { type: "boolean", optional: true },
+                        additional: {
+                          type: "array",
+                          items: {
+                            type: "enum",
+                            items: [
+                              "real_path",
+                              "owner",
+                              "time",
+                              "perm",
+                              "mount_point_type",
+                              "sync_share",
+                              "volume_status",
+                              "indexed",
+                              "hybrid_share",
+                              "worm_share",
+                              "tiering_xattr"
+                            ]
+                          },
+                          optional: true
+                        },
+                        enum_cluster: { type: "boolean", optional: true },
+                        node: { type: "string", optional: true }
+                      }
+                    },
+                    response: {
+                      type: "object",
+                      items: {
+                        favorites: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            items: {
+                              path: { type: "string" },
+                              name: { type: "string" },
+                              status: { type: "enum", items: ["valid", "broken"] }
+                            }
+                          }
+                        },
+                        offset: { type: "integer" },
+                        total: { type: "integer" }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            Info: {
+              methods: {
+                get: {
+                  1: {
+                    response: {
+                      type: "object",
+                      items: {
+                        allow_heic_original: { type: "boolean" },
+                        allow_normal_disable_html: { type: "boolean" },
+                        enable_list_usergrp: { type: "boolean" },
+                        enable_send_email_attachment: { type: "boolean" },
+                        enable_view_google: { type: "boolean" },
+                        enable_view_microsoft: { type: "boolean" },
+                        hostname: { type: "string" },
+                        is_manager: { type: "boolean" },
+                        items: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            items: {
+                              gid: { type: "integer" }
+                            }
+                          }
+                        },
+                        support_file_request: { type: "boolean" },
+                        support_sharing: { type: "boolean" },
+                        support_vfs: { type: "boolean" },
+                        support_virtual: {
+                          type: "object",
+                          items: {
+                            enable_iso_mount: { type: "boolean" },
+                            enable_remote_mount: { type: "boolean" }
+                          }
+                        },
+                        support_virtual_protocol: { type: "string" },
+                        system_codepage: { type: "string" },
+                        uid: { type: "integer" }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            List: {
+              methods: {
+                list_share: {
+                  2: {
+                    params: {
+                      type: "object",
+                      optional: true,
+                      items: {
+                        filetype: { type: "enum", items: ["dir"], optional: true },
+                        sort_by: { type: "enum", items: ["name"], optional: true },
+                        check_dir: { type: "boolean", optional: true },
+                        additional: {
+                          type: "array",
+                          items: {
+                            type: "enum",
+                            items: [
+                              "real_path",
+                              "owner",
+                              "time",
+                              "perm",
+                              "mount_point_type",
+                              "sync_share",
+                              "volume_status",
+                              "indexed",
+                              "hybrid_share",
+                              "worm_share",
+                              "tiering_xattr"
+                            ]
+                          }
+                        },
+                        enum_cluster: { type: "boolean", optional: true },
+                        node: { type: "string", optional: true }
+                      }
+                    },
+                    response: {
+                      type: "object",
+                      items: {
+                        offset: { type: "integer" },
+                        shares: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            items: {
+                              isdir: { type: "boolean" },
+                              name: { type: "string" },
+                              path: { type: "string" }
+                            }
+                          }
+                        },
+                        total: { type: "integer" }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            Mount: {
+              apis: {
+                List: {
+                  methods: {
+                    get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            isoList: { type: "array", items: { type: "unknown" } },
+                            mountConfig: {
+                              type: "object",
+                              items: {
+                                enable_iso_mount: { type: "boolean" },
+                                enable_remote_mount: { type: "boolean" }
+                              }
+                            },
+                            remoteList: { type: "array", items: { type: "unknown" } }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        Finder: {
+          apis: {
+            Bookmark: {
+              methods: {
+                get: {
+                  1: {
+                    response: {
+                      type: "object",
+                      items: {
+                        bookmarks: { type: "array", items: { type: "unknown" } },
+                        total: { type: "integer" }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            FileIndexing: {
+              apis: {
+                Folder: {
+                  methods: {
+                    list: {
+                      1: {
+                        params: {
+                          type: "object",
+                          optional: true,
+                          items: {
+                            direction: { type: "enum", items: ["asc", "desc"], optional: true },
+                            sort_by: { type: "enum", items: ["path"], optional: true },
+                            offset: { type: "integer", optional: true },
+                            additional: { type: "array", items: { type: "unknown" }, optional: true }
+                          }
+                        },
+                        response: {
+                          type: "object",
+                          items: {
+                            folder: { type: "array", items: { type: "unknown" } },
+                            offset: { type: "integer" },
+                            total: { type: "integer" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            Preference: {
+              methods: {
+                get: {
+                  1: {
+                    response: {
+                      type: "object",
+                      items: {
+                        enable_history: { type: "boolean" },
+                        max_fragment_num: { type: "integer" },
+                        max_history_num: { type: "integer" }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            Settings: {
+              methods: {
+                get: {
+                  1: {
+                    response: {
+                      type: "object",
+                      items: {
+                        db_reading_method: { type: "enum", items: ["fs_directory"] },
+                        display_vmtouch_option: { type: "boolean" },
+                        enable_cppjieba_dict: { type: "boolean" },
+                        enable_mlock: { type: "boolean" },
+                        enable_preload_indices: { type: "boolean" },
+                        enable_vmtouch: { type: "boolean" },
+                        max_alive_db_count: { type: "integer" },
+                        max_search_hit_count: { type: "integer" },
+                        reader_alive_timeout: { type: "integer" },
+                        synotifyd_event_mask: { type: "integer" },
+                        vmtouch_reserve_mem: { type: "integer" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

@@ -25,7 +25,8 @@ export type Method = Record<
 >
 
 export type Property = (
-  | { type: "string" | "integer" | "float" | "boolean" | "binary" }
+  | { type: "string" | "integer" | "float" | "boolean" | "binary" | "unknown" | "null" }
+  | { type: "options"; items: Property[] }
   | { type: "enum"; items: string[] }
   | { type: "array"; items: Property }
   | {
