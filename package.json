@@ -1,0 +1,11 @@
+{
+  "name": "synology-nas",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.10",
+    "@types/node": "^25.5.0"
+  },
+  "dependencies": {
+    "ts-morph": "^27.0.2"
+  }
+}
