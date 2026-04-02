@@ -1,4 +1,14 @@
-import type { Registry } from "./types"
+import type { Property, Registry } from "./types"
+
+const CertificateCRTIssuer: Property = {
+  type: "object",
+  items: {
+    city: { type: "string" },
+    common_name: { type: "string" },
+    country: { type: "string" },
+    organization: { type: "string" }
+  }
+}
 
 export const registry: Registry = {
   apis: {
@@ -800,6 +810,185 @@ export const registry: Registry = {
                               read_only_config: { type: "boolean" },
                               tray_groups: { type: "array", items: { type: "unknown" } },
                               tray_icon_class: { type: "string" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            Certificate: {
+              apis: {
+                CRT: {
+                  methods: {
+                    list: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            certificates: {
+                              type: "array",
+                              items: {
+                                type: "object",
+                                items: {
+                                  desc: { type: "string" },
+                                  id: { type: "string" },
+                                  is_broken: { type: "boolean" },
+                                  is_default: { type: "boolean" },
+                                  issuer: CertificateCRTIssuer,
+                                  key_types: { type: "string" },
+                                  renewable: { type: "boolean" },
+                                  self_signed_cacrt_info: {
+                                    type: "object",
+                                    items: {
+                                      issuer: CertificateCRTIssuer,
+                                      subject: CertificateCRTIssuer
+                                    }
+                                  },
+                                  services: {
+                                    type: "array",
+                                    items: {
+                                      type: "object",
+                                      items: {
+                                        display_name: { type: "string" },
+                                        display_name_i18n: { type: "string", optional: true },
+                                        isPkg: { type: "boolean" },
+                                        multiple_cert: { type: "boolean", optional: true },
+                                        owner: { type: "string" },
+                                        service: { type: "string" },
+                                        subscriber: { type: "string" },
+                                        user_setable: { type: "boolean", optional: true }
+                                      }
+                                    }
+                                  },
+                                  signature_algorithm: { type: "string" },
+                                  subject: {
+                                    type: "object",
+                                    items: {
+                                      ...CertificateCRTIssuer.items,
+                                      sub_alt_name: { type: "array", items: { type: "string" } }
+                                    }
+                                  },
+                                  user_deletable: { type: "boolean" },
+                                  valid_from: { type: "string" },
+                                  valid_to: { type: "string" }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            CMS: {
+              apis: {
+                Info: {
+                  methods: {
+                    get: {
+                      1: {
+                        params: {
+                          type: "object",
+                          optional: true,
+                          items: {
+                            additional: {
+                              type: "array",
+                              optional: true,
+                              items: { type: "enum", items: ["gluster_role"] }
+                            }
+                          }
+                        },
+                        response: {
+                          type: "object",
+                          items: {
+                            joined: { type: "boolean" },
+                            additional: {
+                              type: "object",
+                              optional: true,
+                              items: {
+                                gluster_role: {
+                                  type: "integer",
+                                  optional: true
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            CurrentConnection: {
+              methods: {
+                get: {
+                  1: {
+                    params: {
+                      type: "object",
+                      optional: true,
+                      items: {
+                        start: { type: "integer", optional: true },
+                        limit: { type: "integer", optional: true },
+                        sort_by: { type: "enum", items: ["time"], optional: true },
+                        sort_direction: { type: "enum", items: ["DESC", "ASC"], optional: true },
+                        offset: { type: "integer", optional: true },
+                        action: { type: "enum", items: ["enum"], optional: true }
+                      }
+                    },
+                    response: {
+                      type: "object",
+                      items: {
+                        items: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            items: {
+                              can_be_kicked: { type: "boolean" },
+                              descr: { type: "string" },
+                              did: { type: "string" },
+                              first_login_time: { type: "string" },
+                              from: { type: "string" },
+                              is_amfa: { type: "boolean" },
+                              is_current_connected: { type: "boolean" },
+                              is_otp_trusted: { type: "boolean" },
+                              location: { type: "string" },
+                              pid: { type: "integer" },
+                              protocol: { type: "string" },
+                              time: { type: "string" },
+                              type: { type: "string" },
+                              user_agent: { type: "string" },
+                              user_can_be_disabled: { type: "boolean" },
+                              who: { type: "string" }
+                            }
+                          }
+                        },
+                        systime: { type: "string" },
+                        total: { type: "integer" }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            DDNS: {
+              apis: {
+                Ethernet: {
+                  methods: {
+                    list: {
+                      1: {
+                        response: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            items: {
+                              ifname: { type: "string" },
+                              ip: { type: "string" },
+                              ipv6: { type: "array", items: { type: "unknown" } }
                             }
                           }
                         }

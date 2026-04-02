@@ -2,19 +2,26 @@
   <dictionary name="project">
     <words>
       <w>amfa</w>
+      <w>cacrt</w>
       <w>cipherkey</w>
       <w>ciphertoken</w>
       <w>cppjieba</w>
+      <w>ddns</w>
+      <w>descr</w>
       <w>displayname</w>
       <w>getinfo</w>
+      <w>gluster</w>
       <w>heic</w>
+      <w>ifname</w>
       <w>isdir</w>
       <w>mlock</w>
       <w>myds</w>
       <w>nsec</w>
       <w>quickconnect</w>
+      <w>setable</w>
       <w>synotifyd</w>
       <w>synotoken</w>
+      <w>systime</w>
       <w>titlebar</w>
       <w>tsup</w>
       <w>usergrp</w>
