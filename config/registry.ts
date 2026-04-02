@@ -995,6 +995,117 @@ export const registry: Registry = {
                       }
                     }
                   }
+                },
+                ExtIP: {
+                  methods: {
+                    list: {
+                      2: {
+                        params: {
+                          type: "object",
+                          optional: true,
+                          items: {
+                            retry: { type: "boolean", optional: true }
+                          }
+                        },
+                        response: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            items: {
+                              ip: { type: "string" },
+                              ipv6: { type: "string" },
+                              type: { type: "enum", items: ["WAN"] }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                Provider: {
+                  methods: {
+                    list: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            providers: {
+                              type: "array",
+                              items: {
+                                type: "object",
+                                items: {
+                                  id: { type: "string" },
+                                  provider: { type: "string" },
+                                  website: { type: "string" }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                Record: {
+                  methods: {
+                    list: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            next_update_time: { type: "string" },
+                            records: { type: "array", items: { type: "unknown" } }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                Synology: {
+                  methods: {
+                    get_myds_account: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            email: { type: "string" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            DSMNotify: {
+              apis: {
+                Strings: {
+                  methods: {
+                    get: {
+                      1: {
+                        params: {
+                          type: "object",
+                          items: {
+                            lang: { type: "string" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              methods: {
+                notify: {
+                  1: {
+                    respond: false,
+                    params: {
+                      type: "object",
+                      items: {
+                        action: { type: "enum", items: ["apply"] },
+                        clean: { type: "enum", items: ["all"], optional: true }
+                      }
+                    }
+                  }
                 }
               }
             }

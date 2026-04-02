@@ -6,6 +6,7 @@ import { SYNO_Core_Certificate } from "$/services/SYNO/Core/Certificate"
 import { SYNO_Core_CMS } from "$/services/SYNO/Core/CMS"
 import { SYNO_Core_CurrentConnection } from "$/services/SYNO/Core/CurrentConnection"
 import { SYNO_Core_DDNS } from "$/services/SYNO/Core/DDNS"
+import { SYNO_Core_DSMNotify } from "$/services/SYNO/Core/DSMNotify"
 
 export class SYNO_Core {
   constructor(private client: Client) {}
@@ -36,5 +37,9 @@ export class SYNO_Core {
 
   get DDNS() {
     return new SYNO_Core_DDNS(this.client)
+  }
+
+  get DSMNotify() {
+    return new SYNO_Core_DSMNotify(this.client)
   }
 }
