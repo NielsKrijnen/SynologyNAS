@@ -29,6 +29,34 @@ const PersonalSettingsQuotaItem = (children: boolean): Property => ({
   }
 })
 
+const SNMPSetParamsV1V2: Property = { type: "object", items: { rocommunity: { type: "string" } } }
+
+const SNMPSetParamsV3: Property = {
+  type: "object",
+  items: {
+    rouser: { type: "string" },
+    auth_type: { type: "enum", items: ["MD5", "SHA"] },
+    password: { type: "string" }
+  }
+}
+
+const SNMPSetParamsPrivacy: Property = {
+  type: "object",
+  items: {
+    privacy_type: { type: "enum", items: ["DES", "AES"] },
+    privacy_key: { type: "string" }
+  }
+}
+
+const SNMPSetParamsDefault: Property = {
+  type: "object",
+  items: {
+    name: { type: "string", optional: true },
+    location: { type: "string", optional: true },
+    contact: { type: "string", optional: true }
+  }
+}
+
 export const registry: Registry = {
   apis: {
     SYNO: {
@@ -2364,6 +2392,78 @@ export const registry: Registry = {
                         rocommunity: { type: "string" },
                         rouser: { type: "string" }
                       }
+                    }
+                  }
+                },
+                set: {
+                  1: {
+                    respond: false,
+                    params: {
+                      type: "options",
+                      items: [
+                        {
+                          type: "object",
+                          items: { enable_snmp: { type: "boolean", exact: false } }
+                        },
+                        {
+                          type: "object",
+                          items: {
+                            enable_snmp: { type: "boolean", exact: true },
+                            enable_snmp_v1v2: { type: "boolean", exact: true },
+                            enable_snmp_v3: { type: "boolean", exact: false },
+                            ...SNMPSetParamsV1V2.items,
+                            ...SNMPSetParamsDefault.items
+                          }
+                        },
+                        {
+                          type: "object",
+                          items: {
+                            enable_snmp: { type: "boolean", exact: true },
+                            enable_snmp_v1v2: { type: "boolean", exact: false },
+                            enable_snmp_v3: { type: "boolean", exact: true },
+                            enable_privacy: { type: "boolean", exact: false, optional: true },
+                            ...SNMPSetParamsV3.items,
+                            ...SNMPSetParamsDefault.items
+                          }
+                        },
+                        {
+                          type: "object",
+                          items: {
+                            enable_snmp: { type: "boolean", exact: true },
+                            enable_snmp_v1v2: { type: "boolean", exact: false },
+                            enable_snmp_v3: { type: "boolean", exact: true },
+                            enable_snmp_privacy: { type: "boolean", exact: true },
+                            ...SNMPSetParamsV3.items,
+                            ...SNMPSetParamsPrivacy.items,
+                            ...SNMPSetParamsDefault.items
+                          }
+                        },
+                        {
+                          type: "object",
+                          items: {
+                            enable_snmp: { type: "boolean", exact: true },
+                            enable_snmp_v1v2: { type: "boolean", exact: true },
+                            enable_snmp_v3: { type: "boolean", exact: true },
+                            enable_privacy: { type: "boolean", exact: false, optional: true },
+                            ...SNMPSetParamsV1V2.items,
+                            ...SNMPSetParamsV3.items,
+                            ...SNMPSetParamsDefault.items
+                          }
+                        },
+                        {
+                          type: "object",
+                          items: {
+                            enable_snmp: { type: "boolean", exact: true },
+                            enable_snmp_v1v2: { type: "boolean", exact: true },
+                            enable_snmp_v3: { type: "boolean", exact: true },
+                            enable_privacy: { type: "boolean", exact: true },
+                            ...SNMPSetParamsV1V2.items,
+                            ...SNMPSetParamsV3.items,
+                            ...SNMPSetParamsPrivacy.items,
+                            ...SNMPSetParamsDefault.items
+                          }
+                        }
+                      ]
                     }
                   }
                 }
