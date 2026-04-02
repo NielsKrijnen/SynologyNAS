@@ -4,6 +4,10 @@ import { SYNO_Core_Network_Ethernet } from "$/services/SYNO/Core/Network/Etherne
 import { SYNO_Core_Network_Interface } from "$/services/SYNO/Core/Network/Interface"
 import { SYNO_Core_Network_OVS } from "$/services/SYNO/Core/Network/OVS"
 import { SYNO_Core_Network_PPPoE } from "$/services/SYNO/Core/Network/PPPoE"
+import { SYNO_Core_Network_Proxy } from "$/services/SYNO/Core/Network/Proxy"
+import { SYNO_Core_Network_Router } from "$/services/SYNO/Core/Network/Router"
+import { SYNO_Core_Network_TrafficControl } from "$/services/SYNO/Core/Network/TrafficControl"
+import { SYNO_Core_Network_VPN } from "$/services/SYNO/Core/Network/VPN"
 
 export class SYNO_Core_Network {
   constructor(private client: Client) {}
@@ -30,6 +34,22 @@ export class SYNO_Core_Network {
 
   get PPPoE() {
     return new SYNO_Core_Network_PPPoE(this.client)
+  }
+
+  get Proxy() {
+    return new SYNO_Core_Network_Proxy(this.client)
+  }
+
+  get Router() {
+    return new SYNO_Core_Network_Router(this.client)
+  }
+
+  get TrafficControl() {
+    return new SYNO_Core_Network_TrafficControl(this.client)
+  }
+
+  get VPN() {
+    return new SYNO_Core_Network_VPN(this.client)
   }
 }
 

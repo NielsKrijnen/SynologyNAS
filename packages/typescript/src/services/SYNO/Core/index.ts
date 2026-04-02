@@ -16,6 +16,8 @@ import { SYNO_Core_FileServ } from "$/services/SYNO/Core/FileServ"
 import { SYNO_Core_Hardware } from "$/services/SYNO/Core/Hardware"
 import { SYNO_Core_MyDSCenter } from "$/services/SYNO/Core/MyDSCenter"
 import { SYNO_Core_Network } from "$/services/SYNO/Core/Network"
+import { SYNO_Core_NormalUser } from "$/services/SYNO/Core/NormalUser"
+import { SYNO_Core_Notification } from "$/services/SYNO/Core/Notification"
 
 export class SYNO_Core {
   constructor(private client: Client) {}
@@ -86,5 +88,13 @@ export class SYNO_Core {
 
   get Network() {
     return new SYNO_Core_Network(this.client)
+  }
+
+  get NormalUser() {
+    return new SYNO_Core_NormalUser(this.client)
+  }
+
+  get Notification() {
+    return new SYNO_Core_Notification(this.client)
   }
 }

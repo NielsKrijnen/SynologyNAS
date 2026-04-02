@@ -10,11 +10,14 @@
       <w>ddns</w>
       <w>descr</w>
       <w>dirsort</w>
+      <w>disallowchpasswd</w>
       <w>displayname</w>
+      <w>fullname</w>
       <w>getinfo</w>
       <w>gluster</w>
       <w>heic</w>
       <w>ifname</w>
+      <w>iptype</w>
       <w>isdir</w>
       <w>mlock</w>
       <w>msdfs</w>

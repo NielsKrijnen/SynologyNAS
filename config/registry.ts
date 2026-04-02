@@ -1511,6 +1511,181 @@ export const registry: Registry = {
                       }
                     }
                   }
+                },
+                Proxy: {
+                  methods: {
+                    get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            enable: { type: "boolean" },
+                            enable_auth: { type: "boolean" },
+                            enable_bypass: { type: "boolean" },
+                            enable_different_host: { type: "boolean" },
+                            http_host: { type: "string" },
+                            http_port: { type: "string" },
+                            https_host: { type: "string" },
+                            https_port: { type: "string" },
+                            password: { type: "string" },
+                            username: { type: "string" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                Router: {
+                  apis: {
+                    Gateway: {
+                      apis: {
+                        List: {
+                          methods: {
+                            get: {
+                              1: {
+                                params: {
+                                  type: "object",
+                                  items: {
+                                    iptype: { type: "enum", items: ["ipv4"] },
+                                    type: { type: "enum", items: ["wan"] }
+                                  }
+                                },
+                                response: {
+                                  type: "object",
+                                  items: {
+                                    configs: {
+                                      type: "array",
+                                      items: {
+                                        type: "object",
+                                        items: {
+                                          class: { type: "string" },
+                                          dns: { type: "string" },
+                                          gateway: { type: "string" },
+                                          ifname: { type: "string" },
+                                          priority: { type: "integer" },
+                                          slave: { type: "boolean" }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                TrafficControl: {
+                  apis: {
+                    Rules: {
+                      methods: {
+                        load: {
+                          1: {
+                            params: {
+                              type: "object",
+                              items: { adapter: { type: "string" } }
+                            },
+                            response: {
+                              type: "object",
+                              items: {
+                                rules: { type: "array", items: { type: "unknown" } },
+                                total: { type: "integer" }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                VPN: {
+                  apis: {
+                    L2TP: {
+                      methods: {
+                        list: {
+                          1: {
+                            params: {
+                              type: "object",
+                              optional: true,
+                              items: {
+                                additional: {
+                                  type: "array",
+                                  optional: true,
+                                  items: { type: "enum", items: ["status"] }
+                                }
+                              }
+                            },
+                            response: {
+                              type: "array",
+                              items: { type: "unknown" }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    OpenVPN: {
+                      methods: {
+                        list: {
+                          1: {
+                            params: {
+                              type: "object",
+                              optional: false,
+                              items: {
+                                additional: {
+                                  type: "array",
+                                  optional: true,
+                                  items: { type: "enum", items: ["status"] }
+                                }
+                              }
+                            },
+                            response: { type: "array", items: { type: "unknown" } }
+                          }
+                        }
+                      }
+                    },
+                    OpenVPNWithConf: {
+                      methods: {
+                        list: {
+                          1: {
+                            params: {
+                              type: "object",
+                              optional: true,
+                              items: {
+                                additional: {
+                                  type: "array",
+                                  optional: true,
+                                  items: { type: "enum", items: ["status"] }
+                                }
+                              }
+                            },
+                            response: { type: "array", items: { type: "unknown" } }
+                          }
+                        }
+                      }
+                    },
+                    PPTP: {
+                      methods: {
+                        list: {
+                          1: {
+                            params: {
+                              type: "object",
+                              optional: true,
+                              items: {
+                                additional: {
+                                  type: "array",
+                                  optional: true,
+                                  items: { type: "enum", items: ["status"] }
+                                }
+                              }
+                            },
+                            response: { type: "array", items: { type: "unknown" } }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               },
               methods: {
@@ -1542,6 +1717,196 @@ export const registry: Registry = {
                         server_name: { type: "string" },
                         use_dhcp_domain: { type: "boolean" },
                         v6gateway: { type: "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            NormalUser: {
+              apis: {
+                LoginNotify: {
+                  methods: {
+                    check: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            need_notify: { type: "boolean" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              methods: {
+                get: {
+                  1: {
+                    response: {
+                      type: "object",
+                      items: {
+                        OTP_response: { type: "boolean" },
+                        OTP_enforced: { type: "boolean" },
+                        disallowchpasswd: { type: "boolean" },
+                        editable: { type: "boolean" },
+                        email: { type: "string" },
+                        fullname: { type: "string" },
+                        password_last_change: { type: "integer" },
+                        username: { type: "string" }
+                      }
+                    }
+                  }
+                },
+                set: {
+                  2: { respond: false }
+                }
+              }
+            },
+            Notification: {
+              apis: {
+                Advance: {
+                  apis: {
+                    FilterSettings: {
+                      apis: {
+                        Profile: {
+                          methods: {
+                            list: {
+                              1: {
+                                response: {
+                                  type: "object",
+                                  items: {
+                                    profiles: { type: "array", items: { type: "unknown" } }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        Template: {
+                          methods: {
+                            get: {
+                              1: {
+                                response: {
+                                  type: "object",
+                                  items: {
+                                    templates: {
+                                      type: "array",
+                                      items: {
+                                        type: "object",
+                                        items: {
+                                          config: {
+                                            type: "object",
+                                            items: {
+                                              default_enabled_rule_level: { type: "string" },
+                                              default_type: { type: "string" },
+                                              is_default: { type: "boolean" }
+                                            }
+                                          },
+                                          name: { type: "string" },
+                                          template_id: { type: "integer" },
+                                          used_by: { type: "array", items: { type: "unknown" } }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                Mail: {
+                  apis: {
+                    Conf: {
+                      methods: {
+                        get: {
+                          2: {
+                            response: {
+                              type: "object",
+                              items: {
+                                enable_mail: { type: "boolean" },
+                                enable_oauth: { type: "boolean" },
+                                in_use: { type: "array", items: { type: "unknown" } },
+                                mail: { type: "array", items: { type: "unknown" } },
+                                send_welcome_mail: { type: "boolean" },
+                                sender_mail: { type: "string" },
+                                sender_name: { type: "string" },
+                                smtp_auth: {
+                                  type: "object",
+                                  items: {
+                                    enable: { type: "boolean" },
+                                    user: { type: "string" }
+                                  }
+                                },
+                                smtp_info: {
+                                  type: "object",
+                                  items: {
+                                    port: { type: "integer" },
+                                    server: { type: "string" },
+                                    ssl: { type: "boolean" },
+                                    verifyCert: { type: "boolean" }
+                                  }
+                                },
+                                subject_prefix: { type: "string" }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                Push: {
+                  apis: {
+                    Mail: {
+                      methods: {
+                        get: {
+                          2: {
+                            response: {
+                              type: "object",
+                              items: {
+                                enable_mail: { type: "boolean" },
+                                mail: { type: "array", items: { type: "unknown" } },
+                                subject_prefix: { type: "string" },
+                                template_id: { type: "integer" }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    Webhook: {
+                      apis: {
+                        Provider: {
+                          methods: {
+                            list: {
+                              2: {
+                                response: {
+                                  type: "object",
+                                  items: {
+                                    count: { type: "integer" },
+                                    list: { type: "array", items: { type: "unknown" } }
+                                  }
+                                }
+                              }
+                            },
+                            delete: {
+                              2: {
+                                respond: false,
+                                params: {
+                                  type: "object",
+                                  items: {
+                                    profile_id: { type: "integer" }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
                       }
                     }
                   }
