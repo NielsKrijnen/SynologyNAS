@@ -3,6 +3,8 @@
     <words>
       <w>adserver</w>
       <w>amfa</w>
+      <w>autoupdateall</w>
+      <w>autoupdateimportant</w>
       <w>cacrt</w>
       <w>cipherkey</w>
       <w>ciphertoken</w>
@@ -19,12 +21,16 @@
       <w>ifname</w>
       <w>iptype</w>
       <w>isdir</w>
+      <w>mailset</w>
       <w>mlock</w>
       <w>msdfs</w>
       <w>myds</w>
       <w>nsec</w>
       <w>ntlmv</w>
+      <w>pkgs</w>
       <w>quickconnect</w>
+      <w>rocommunity</w>
+      <w>rouser</w>
       <w>setable</w>
       <w>synotify</w>
       <w>synotifyd</w>

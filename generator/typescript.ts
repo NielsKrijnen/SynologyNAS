@@ -189,15 +189,15 @@ function addAPI(file: SourceFile, apiClass: ClassDeclaration, keys: string[], ap
 
 function writeType(writer: CodeBlockWriter, property: Property) {
   if (property.type === "string") {
-    writer.write("string")
+    writer.write(property.exact ?? "string")
   } else if (property.type === "boolean") {
-    writer.write("boolean")
+    writer.write(property.exact !== undefined ? `${property.exact}` : "boolean")
   } else if (property.type === "unknown") {
     writer.write("unknown")
   } else if (property.type === "null") {
     writer.write("null")
   } else if (property.type === "integer" || property.type === "float") {
-    writer.write("number")
+    writer.write(property.exact ? property.exact.toString() : "number")
   } else if (property.type === "binary") {
     writer.write("Blob | File")
   } else if (property.type === "array") {

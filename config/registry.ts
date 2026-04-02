@@ -10,6 +10,25 @@ const CertificateCRTIssuer: Property = {
   }
 }
 
+const PersonalSettingsQuotaItem = (children: boolean): Property => ({
+  type: "object",
+  items: {
+    ...(children && {
+      children: {
+        type: "array",
+        items: PersonalSettingsQuotaItem(false)
+      }
+    }),
+    expanded: { type: "boolean" },
+    leaf: { type: "boolean" },
+    name: { type: "string" },
+    quota: { type: "options", items: [{ type: "string" }, { type: "integer" }] },
+    share_quota: { type: "options", items: [{ type: "string" }, { type: "integer" }] },
+    share_used: { type: "options", items: [{ type: "string" }, { type: "integer" }] },
+    used: { type: "options", items: [{ type: "string" }, { type: "integer" }] }
+  }
+})
+
 export const registry: Registry = {
   apis: {
     SYNO: {
@@ -1907,6 +1926,443 @@ export const registry: Registry = {
                             }
                           }
                         }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            OTP: {
+              apis: {
+                EnforcePolicy: {
+                  methods: {
+                    get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            otp_enforce_option: { type: "string" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              methods: {
+                get_one: {
+                  2: {
+                    response: {
+                      type: "object",
+                      items: {
+                        otp_set: { type: "boolean" }
+                      }
+                    }
+                  }
+                },
+                get_qrcode: {
+                  3: {
+                    params: {
+                      type: "object",
+                      items: {
+                        enable_margin: { type: "boolean", optional: true },
+                        account: { type: "string" }
+                      }
+                    },
+                    response: {
+                      type: "object",
+                      items: {
+                        appAccount: { type: "string" },
+                        img: { type: "string" },
+                        key: { type: "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            Package: {
+              apis: {
+                Feed: {
+                  methods: {
+                    list: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            items: { type: "array", items: { type: "unknown" } },
+                            total: { type: "integer" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                Installation: {
+                  methods: {
+                    get_queue: {
+                      1: {
+                        params: {
+                          type: "object",
+                          items: {
+                            pkgs: {
+                              type: "array",
+                              items: {
+                                type: "object",
+                                items: {
+                                  pkg: { type: "string" },
+                                  operation: { type: "enum", items: ["install"] },
+                                  version: { type: "string" },
+                                  beta: { type: "boolean" }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        response: {
+                          type: "object",
+                          items: {
+                            broken_pkgs: { type: "array", items: { type: "unknown" } },
+                            cause_pausing_pkgs: { type: "array", items: { type: "unknown" } },
+                            conflicted_pkgs: { type: "array", items: { type: "unknown" } },
+                            non_exist_pkgs: { type: "array", items: { type: "unknown" } },
+                            paused_pkgs: { type: "array", items: { type: "unknown" } },
+                            queue: {
+                              type: "array",
+                              items: {
+                                type: "object",
+                                items: {
+                                  beta: { type: "boolean" },
+                                  pkg: { type: "string" },
+                                  volume: { type: "string" }
+                                }
+                              }
+                            },
+                            replaced_pkgs: { type: "array", items: { type: "unknown" } }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                Server: {
+                  methods: {
+                    check: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            action: { type: "string" },
+                            error: { type: "object", items: { code: { type: "integer" } } },
+                            stage: { type: "string" },
+                            success: { type: "boolean" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                Setting: {
+                  methods: {
+                    get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            autoupdateall: { type: "boolean" },
+                            autoupdateimportant: { type: "boolean" },
+                            enable_autoupdate: { type: "boolean" },
+                            enable_dsm: { type: "boolean" },
+                            enable_email: { type: "boolean" },
+                            mailset: { type: "boolean" },
+                            show_disable_autoupdate: { type: "boolean" },
+                            trust_level: { type: "integer" },
+                            update_channel: { type: "boolean" },
+                            volume_count: { type: "integer" },
+                            volume_list: {
+                              type: "array",
+                              items: {
+                                type: "object",
+                                items: {
+                                  desc: { type: "string" },
+                                  display: { type: "string" },
+                                  mount_point: { type: "string" },
+                                  size_free: { type: "string" },
+                                  size_total: { type: "string" },
+                                  vol_desc: { type: "string" },
+                                  volume_features: { type: "array", items: { type: "unknown" } }
+                                }
+                              }
+                            },
+                            volume_status: { type: "string" }
+                          }
+                        }
+                      }
+                    },
+                    set: {
+                      1: {
+                        params: {
+                          type: "object",
+                          optional: true,
+                          items: {
+                            update_channel: { type: "enum", items: ["stable", "beta"] },
+                            enable_email: { type: "boolean" },
+                            enable_dsm: { type: "boolean" },
+                            enable_autoupdate: { type: "boolean" },
+                            autoupdateall: { type: "boolean" },
+                            autoupdateimportant: { type: "boolean" }
+                          }
+                        },
+                        response: {
+                          type: "object",
+                          items: {
+                            enable_dsm: { type: "boolean" },
+                            enable_email: { type: "boolean" },
+                            update_channel: { type: "enum", items: ["stable", "beta"] }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              methods: {
+                list: {
+                  2: {
+                    params: {
+                      type: "object",
+                      optional: true,
+                      items: {
+                        additional: {
+                          type: "array",
+                          optional: true,
+                          items: { type: "enum", items: ["status_sketch", "dsm_apps", "install_type"] }
+                        },
+                        ignore_hidden: { type: "boolean", optional: true }
+                      }
+                    },
+                    response: {
+                      type: "object",
+                      items: {
+                        packages: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            items: {
+                              additional: {
+                                type: "object",
+                                optional: true,
+                                items: {
+                                  status_sketch: { type: "string", optional: true },
+                                  dsm_apps: { type: "string", optional: true },
+                                  install_type: { type: "string", optional: true }
+                                }
+                              },
+                              id: { type: "string" },
+                              name: { type: "string" },
+                              timestamp: { type: "integer" },
+                              version: { type: "string" }
+                            }
+                          }
+                        },
+                        total: { type: "integer" }
+                      }
+                    }
+                  }
+                },
+                feasibility_check: {
+                  1: {
+                    respond: false,
+                    params: {
+                      type: "object",
+                      items: {
+                        type: { type: "enum", items: ["install_check"] },
+                        packages: { type: "array", items: { type: "string" } }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            PersonalSettings: {
+              methods: {
+                quota: {
+                  1: {
+                    params: {
+                      type: "object",
+                      optional: true,
+                      items: {
+                        start: { type: "integer", optional: true },
+                        offset: { type: "integer", optional: true },
+                        limit: { type: "integer", optional: true }
+                      }
+                    },
+                    response: {
+                      type: "object",
+                      items: {
+                        items: { type: "array", items: PersonalSettingsQuotaItem(true) },
+                        total: { type: "integer" }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            Polling: {
+              apis: {
+                Data: {
+                  methods: {
+                    get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            diskList: { type: "array", items: { type: "unknown" } }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            Promotion: {
+              apis: {
+                Info: {
+                  methods: {
+                    is_2FA_enabled: {
+                      1: {
+                        response: {
+                          type: "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                PreInstall: {
+                  methods: {
+                    get_never_show: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            never_show: { type: "string" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            QuickConnect: {
+              apis: {
+                Permission: {
+                  methods: {
+                    get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            services: {
+                              type: "array",
+                              items: {
+                                type: "object",
+                                items: { enabled: { type: "boolean" }, id: { type: "string" } }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              methods: {
+                check_availability: {
+                  3: {
+                    response: {
+                      type: "object",
+                      items: {
+                        available: { type: "boolean" },
+                        code: { type: "integer" },
+                        country: { type: "string" }
+                      }
+                    }
+                  }
+                },
+                get: {
+                  2: {
+                    response: {
+                      type: "object",
+                      items: {
+                        ddns_domain: { type: "string" },
+                        domain: { type: "string" },
+                        enabled: { type: "boolean" },
+                        myds_account: { type: "string" },
+                        region: { type: "string" },
+                        server_alias: { type: "string" },
+                        server_id: { type: "string" }
+                      }
+                    }
+                  }
+                },
+                status: {
+                  1: {
+                    response: {
+                      type: "object",
+                      items: {
+                        alias_status: { type: "string" },
+                        status: { type: "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            QuickStart: {
+              apis: {
+                Info: {
+                  methods: {
+                    load_ds_info: {
+                      3: {
+                        response: {
+                          type: "object",
+                          items: {
+                            admin_configured: { type: "boolean" },
+                            ew20_website_url: { type: "string" },
+                            first_admin_login: { type: "boolean" },
+                            privacy_agreement: { type: "string" },
+                            promote_ew: { type: "boolean" },
+                            udc_check_state: { type: "string" },
+                            udc_enabled: { type: "string" },
+                            welcome_hide: { type: "boolean" },
+                            welcome_upgrade_step: { type: "boolean" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            SNMP: {
+              methods: {
+                get: {
+                  1: {
+                    response: {
+                      type: "object",
+                      items: {
+                        contact: { type: "string" },
+                        enable_snmp: { type: "boolean" },
+                        enable_snmp_v1v2: { type: "boolean" },
+                        enable_snmp_v3: { type: "boolean" },
+                        location: { type: "string" },
+                        name: { type: "string" },
+                        node0_name: { type: "string" },
+                        node1_name: { type: "string" },
+                        rocommunity: { type: "string" },
+                        rouser: { type: "string" }
                       }
                     }
                   }

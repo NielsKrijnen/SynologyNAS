@@ -18,6 +18,14 @@ import { SYNO_Core_MyDSCenter } from "$/services/SYNO/Core/MyDSCenter"
 import { SYNO_Core_Network } from "$/services/SYNO/Core/Network"
 import { SYNO_Core_NormalUser } from "$/services/SYNO/Core/NormalUser"
 import { SYNO_Core_Notification } from "$/services/SYNO/Core/Notification"
+import { SYNO_Core_OTP } from "$/services/SYNO/Core/OTP"
+import { SYNO_Core_Package } from "$/services/SYNO/Core/Package"
+import { SYNO_Core_PersonalSettings } from "$/services/SYNO/Core/PersonalSettings"
+import { SYNO_Core_Polling } from "$/services/SYNO/Core/Polling"
+import { SYNO_Core_Promotion } from "$/services/SYNO/Core/Promotion"
+import { SYNO_Core_QuickConnect } from "$/services/SYNO/Core/QuickConnect"
+import { SYNO_Core_QuickStart } from "$/services/SYNO/Core/QuickStart"
+import { SYNO_Core_SNMP } from "$/services/SYNO/Core/SNMP"
 
 export class SYNO_Core {
   constructor(private client: Client) {}
@@ -96,5 +104,37 @@ export class SYNO_Core {
 
   get Notification() {
     return new SYNO_Core_Notification(this.client)
+  }
+
+  get OTP() {
+    return new SYNO_Core_OTP(this.client)
+  }
+
+  get Package() {
+    return new SYNO_Core_Package(this.client)
+  }
+
+  get PersonalSettings() {
+    return new SYNO_Core_PersonalSettings(this.client)
+  }
+
+  get Polling() {
+    return new SYNO_Core_Polling(this.client)
+  }
+
+  get Promotion() {
+    return new SYNO_Core_Promotion(this.client)
+  }
+
+  get QuickConnect() {
+    return new SYNO_Core_QuickConnect(this.client)
+  }
+
+  get QuickStart() {
+    return new SYNO_Core_QuickStart(this.client)
+  }
+
+  get SNMP() {
+    return new SYNO_Core_SNMP(this.client)
   }
 }
