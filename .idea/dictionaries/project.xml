@@ -1,6 +1,7 @@
 <component name="ProjectDictionaryState">
   <dictionary name="project">
     <words>
+      <w>adserver</w>
       <w>amfa</w>
       <w>cacrt</w>
       <w>cipherkey</w>
@@ -8,6 +9,7 @@
       <w>cppjieba</w>
       <w>ddns</w>
       <w>descr</w>
+      <w>dirsort</w>
       <w>displayname</w>
       <w>getinfo</w>
       <w>gluster</w>
@@ -15,17 +17,24 @@
       <w>ifname</w>
       <w>isdir</w>
       <w>mlock</w>
+      <w>msdfs</w>
       <w>myds</w>
       <w>nsec</w>
+      <w>ntlmv</w>
       <w>quickconnect</w>
       <w>setable</w>
+      <w>synotify</w>
       <w>synotifyd</w>
       <w>synotoken</w>
       <w>systime</w>
       <w>titlebar</w>
       <w>tsup</w>
       <w>usergrp</w>
+      <w>vetofile</w>
+      <w>vetofiles</w>
       <w>vmtouch</w>
+      <w>widelink</w>
+      <w>windomain</w>
       <w>xattr</w>
     </words>
   </dictionary>

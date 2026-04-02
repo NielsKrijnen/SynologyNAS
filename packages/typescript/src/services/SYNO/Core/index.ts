@@ -5,8 +5,17 @@ import { SYNO_Core_BackgroundTask } from "$/services/SYNO/Core/BackgroundTask"
 import { SYNO_Core_Certificate } from "$/services/SYNO/Core/Certificate"
 import { SYNO_Core_CMS } from "$/services/SYNO/Core/CMS"
 import { SYNO_Core_CurrentConnection } from "$/services/SYNO/Core/CurrentConnection"
+import { SYNO_Core_DataCollect } from "$/services/SYNO/Core/DataCollect"
 import { SYNO_Core_DDNS } from "$/services/SYNO/Core/DDNS"
+import { SYNO_Core_Desktop } from "$/services/SYNO/Core/Desktop"
+import { SYNO_Core_DisableAdmin } from "$/services/SYNO/Core/DisableAdmin"
 import { SYNO_Core_DSMNotify } from "$/services/SYNO/Core/DSMNotify"
+import { SYNO_Core_EW } from "$/services/SYNO/Core/EW"
+import { SYNO_Core_ExternalDevice } from "$/services/SYNO/Core/ExternalDevice"
+import { SYNO_Core_FileServ } from "$/services/SYNO/Core/FileServ"
+import { SYNO_Core_Hardware } from "$/services/SYNO/Core/Hardware"
+import { SYNO_Core_MyDSCenter } from "$/services/SYNO/Core/MyDSCenter"
+import { SYNO_Core_Network } from "$/services/SYNO/Core/Network"
 
 export class SYNO_Core {
   constructor(private client: Client) {}
@@ -35,11 +44,47 @@ export class SYNO_Core {
     return new SYNO_Core_CurrentConnection(this.client)
   }
 
+  get DataCollect() {
+    return new SYNO_Core_DataCollect(this.client)
+  }
+
   get DDNS() {
     return new SYNO_Core_DDNS(this.client)
   }
 
+  get Desktop() {
+    return new SYNO_Core_Desktop(this.client)
+  }
+
+  get DisableAdmin() {
+    return new SYNO_Core_DisableAdmin(this.client)
+  }
+
   get DSMNotify() {
     return new SYNO_Core_DSMNotify(this.client)
+  }
+
+  get EW() {
+    return new SYNO_Core_EW(this.client)
+  }
+
+  get ExternalDevice() {
+    return new SYNO_Core_ExternalDevice(this.client)
+  }
+
+  get FileServ() {
+    return new SYNO_Core_FileServ(this.client)
+  }
+
+  get Hardware() {
+    return new SYNO_Core_Hardware(this.client)
+  }
+
+  get MyDSCenter() {
+    return new SYNO_Core_MyDSCenter(this.client)
+  }
+
+  get Network() {
+    return new SYNO_Core_Network(this.client)
   }
 }

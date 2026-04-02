@@ -975,6 +975,25 @@ export const registry: Registry = {
                 }
               }
             },
+            DataCollect: {
+              apis: {
+                Application: {
+                  methods: {
+                    record: {
+                      1: {
+                        respond: false,
+                        params: {
+                          type: "object",
+                          items: {
+                            app: { type: "string" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
             DDNS: {
               apis: {
                 Ethernet: {
@@ -1077,6 +1096,47 @@ export const registry: Registry = {
                 }
               }
             },
+            Desktop: {
+              apis: {
+                PersonalUpdater: {
+                  methods: {
+                    need_update: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            need_update: { type: "boolean" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                Timeout: {
+                  methods: {
+                    check: {
+                      1: {
+                        respond: false
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            DisableAdmin: {
+              methods: {
+                get: {
+                  1: {
+                    response: {
+                      type: "object",
+                      items: {
+                        notify_disable_admin: { type: "boolean" }
+                      }
+                    }
+                  }
+                }
+              }
+            },
             DSMNotify: {
               apis: {
                 Strings: {
@@ -1103,6 +1163,385 @@ export const registry: Registry = {
                       items: {
                         action: { type: "enum", items: ["apply"] },
                         clean: { type: "enum", items: ["all"], optional: true }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            EW: {
+              apis: {
+                Info: {
+                  methods: {
+                    get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            have_applied_eunit: { type: "boolean" },
+                            info: {
+                              type: "object",
+                              items: { sn: { type: "string" }, status: { type: "string" } }
+                            },
+                            mail: { type: "string" },
+                            show_welcome_page: { type: "boolean" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            ExternalDevice: {
+              apis: {
+                Storage: {
+                  apis: {
+                    eSATA: {
+                      methods: {
+                        list: {
+                          1: {
+                            response: {
+                              type: "object",
+                              items: {
+                                devices: { type: "array", items: { type: "unknown" } }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    USB: {
+                      methods: {
+                        list: {
+                          1: {
+                            response: {
+                              type: "object",
+                              items: {
+                                devices: { type: "array", items: { type: "unknown" } }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            FileServ: {
+              apis: {
+                AFP: {
+                  methods: {
+                    get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            enable_afp: { type: "boolean" },
+                            enable_disconnect_quick: { type: "boolean" },
+                            enable_umask: { type: "boolean" },
+                            time_machine: { type: "string" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                NFS: {
+                  methods: {
+                    get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            enable_nfs: { type: "boolean" },
+                            enable_nfs_v4: { type: "boolean" },
+                            enabled_minor_ver: { type: "integer" },
+                            nfs_v4_domain: { type: "string" },
+                            read_size: { type: "integer" },
+                            support_encrypt_share: { type: "integer" },
+                            support_major_ver: { type: "integer" },
+                            support_minor_ver: { type: "integer" },
+                            unix_pri_enable: { type: "boolean" },
+                            write_size: { type: "integer" }
+                          }
+                        }
+                      },
+                      2: {
+                        response: {
+                          type: "object",
+                          items: {
+                            enable_nfs: { type: "boolean" },
+                            enable_nfs_v4: { type: "boolean" },
+                            enabled_minor_ver: { type: "integer" },
+                            nfs_v4_domain: { type: "string" },
+                            read_size: { type: "integer" },
+                            support_encrypt_share: { type: "integer" },
+                            support_major_ver: { type: "integer" },
+                            support_minor_ver: { type: "integer" },
+                            unix_pri_enable: { type: "boolean" },
+                            write_size: { type: "integer" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                SMB: {
+                  methods: {
+                    get: {
+                      3: {
+                        response: {
+                          type: "object",
+                          items: {
+                            disable_shadow_copy: { type: "boolean" },
+                            disable_strict_allocate: { type: "boolean" },
+                            enable_access_based_share_enum: { type: "boolean" },
+                            enable_adserver: { type: "options", items: [{ type: "unknown" }, { type: "null" }] },
+                            enable_aio_read: { type: "boolean" },
+                            enable_delete_vetofiles: { type: "boolean" },
+                            enable_dirsort: { type: "boolean" },
+                            enable_durable_handles: { type: "boolean" },
+                            enable_enhance_log: { type: "boolean" },
+                            enable_fruit_locking: { type: "boolean" },
+                            enable_local_master_browser: { type: "boolean" },
+                            enable_mask: { type: "boolean" },
+                            enable_msdfs: { type: "boolean" },
+                            enable_multichannel: { type: "boolean" },
+                            enable_ntlmv1_auth: { type: "boolean" },
+                            enable_op_lock: { type: "boolean" },
+                            enable_perf_chart: { type: "boolean" },
+                            enable_reset_on_zero_vc: { type: "boolean" },
+                            enable_samba: { type: "boolean" },
+                            enable_server_signing: { type: "integer" },
+                            enable_smb2_leases: { type: "boolean" },
+                            enable_smb3_directory_leasing: { type: "boolean" },
+                            enable_strict_sync: { type: "boolean" },
+                            enable_symlink: { type: "boolean" },
+                            enable_syno_catia: { type: "boolean" },
+                            enable_synotify: { type: "boolean" },
+                            enable_vetofile: { type: "boolean" },
+                            enable_widelink: { type: "boolean" },
+                            offline_files_support: { type: "boolean" },
+                            smb3_directory_leasing_scope: { type: "enum", items: ["home_only"] },
+                            smb_encrypt_transport: { type: "integer" },
+                            smb_max_protocol: { type: "integer" },
+                            smb_min_protocol: { type: "integer" },
+                            syno_wildcard_search: { type: "boolean" },
+                            vetofile: { type: "string" },
+                            wins: { type: "string" },
+                            workgroup: { type: "string" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            Hardware: {
+              apis: {
+                FanSpeed: {
+                  methods: {
+                    get: {
+                      1: {}
+                    }
+                  }
+                },
+                SpectreMeltdown: {
+                  methods: {
+                    get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            enable_spectre_meltdown_mitigation: { type: "boolean" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            MyDSCenter: {
+              methods: {
+                query: {
+                  2: {
+                    response: {
+                      type: "object",
+                      items: {
+                        is_logged_in: { type: "boolean" }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            Network: {
+              apis: {
+                Bond: {
+                  methods: {
+                    list: {
+                      2: {
+                        response: {
+                          type: "array",
+                          items: { type: "unknown" }
+                        }
+                      }
+                    }
+                  }
+                },
+                Ethernet: {
+                  apis: {
+                    External: {
+                      methods: {
+                        check: {
+                          1: {
+                            response: {
+                              type: "array",
+                              items: { type: "unknown" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  methods: {
+                    list: {
+                      2: {
+                        response: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            items: {
+                              block: { type: "integer" },
+                              dns: { type: "string" },
+                              duplex: { type: "boolean" },
+                              enable_ha_ip: { type: "boolean" },
+                              enable_vlan: { type: "boolean" },
+                              gateway: { type: "string" },
+                              ha_local_ip: { type: "string" },
+                              ha_local_mask: { type: "string" },
+                              ifname: { type: "string" },
+                              ip: { type: "string" },
+                              ipv6: { type: "array", items: { type: "unknown" } },
+                              is_default_gateway: { type: "boolean" },
+                              is_main_ha_ip: { type: "boolean" },
+                              mask: { type: "string" },
+                              max_supported_speed: { type: "integer" },
+                              mtu: { type: "integer" },
+                              mtu_config: { type: "integer" },
+                              nat: { type: "boolean" },
+                              speed: { type: "integer" },
+                              status: { type: "string" },
+                              type: { type: "string" },
+                              use_dhcp: { type: "boolean" },
+                              vlan_id: { type: "integer" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                Interface: {
+                  methods: {
+                    list: {
+                      1: {
+                        response: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            items: {
+                              ifname: { type: "string" },
+                              ip: { type: "string" },
+                              mask: { type: "string" },
+                              speed: { type: "integer" },
+                              status: { type: "string" },
+                              type: { type: "string" },
+                              use_dhcp: { type: "boolean" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                OVS: {
+                  methods: {
+                    get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            enable_ovs: { type: "boolean" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                PPPoE: {
+                  methods: {
+                    list: {
+                      1: {
+                        response: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            items: {
+                              devs: { type: "array", items: { type: "string" } },
+                              guest_enabled: { type: "boolean" },
+                              ifname: { type: "string" },
+                              ip: { type: "string" },
+                              is_default_gateway: { type: "integer" },
+                              mask: { type: "string" },
+                              mtu_config: { type: "string" },
+                              password: { type: "string" },
+                              real_ifname: { type: "string" },
+                              status: { type: "string" },
+                              type: { type: "string" },
+                              use_dhcp: { type: "boolean" },
+                              username: { type: "string" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              methods: {
+                get: {
+                  2: {
+                    response: {
+                      type: "object",
+                      items: {
+                        arp_ignore: { type: "boolean" },
+                        dns_manual: { type: "boolean" },
+                        dns_primary: { type: "string" },
+                        dns_secondary: { type: "string" },
+                        enable_spectre_meltdown_mitigation: { type: "boolean" },
+                        enable_windomain: { type: "boolean" },
+                        gateway: { type: "string" },
+                        gateway_info: {
+                          type: "object",
+                          items: {
+                            ifname: { type: "string" },
+                            ip: { type: "string" },
+                            mask: { type: "string" },
+                            status: { type: "string" },
+                            type: { type: "string" },
+                            use_dhcp: { type: "boolean" }
+                          }
+                        },
+                        ipv4_first: { type: "boolean" },
+                        multi_gateway: { type: "boolean" },
+                        server_name: { type: "string" },
+                        use_dhcp_domain: { type: "boolean" },
+                        v6gateway: { type: "string" }
                       }
                     }
                   }
