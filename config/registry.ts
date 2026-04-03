@@ -57,6 +57,28 @@ const SNMPSetParamsDefault: Property = {
   }
 }
 
+const SecurityScanStatusSystemGetItem: Property = {
+  type: "object",
+  items: {
+    category: { type: "string" },
+    fail: {
+      type: "object",
+      items: {
+        danger: { type: "integer" },
+        info: { type: "integer" },
+        outOfDate: { type: "integer" },
+        risk: { type: "integer" },
+        warning: { type: "integer" }
+      }
+    },
+    failSeverity: { type: "string" },
+    progress: { type: "integer" },
+    runningItem: { type: "string" },
+    total: { type: "integer" },
+    waitNum: { type: "integer" }
+  }
+}
+
 export const registry: Registry = {
   apis: {
     SYNO: {
@@ -2504,6 +2526,142 @@ export const registry: Registry = {
                           items: {
                             enable_firewall: { type: "boolean" },
                             profile_name: { type: "string" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            SecurityScan: {
+              apis: {
+                Conf: {
+                  methods: {
+                    time_get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            curTime: { type: "integer" },
+                            success: { type: "boolean" }
+                          }
+                        }
+                      }
+                    },
+                    first_get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            firstLogAnalyzer: { type: "boolean" },
+                            firstScan: { type: "boolean" },
+                            iscrack: { type: "boolean" },
+                            success: { type: "boolean" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                Operation: {
+                  methods: {
+                    update: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            lang: {
+                              type: "object",
+                              items: {
+                                rule: {
+                                  type: "object",
+                                  additionalProperties: { type: "string" }
+                                },
+                                rules: {
+                                  type: "object",
+                                  additionalProperties: { type: "string" }
+                                }
+                              }
+                            },
+                            success: { type: "boolean" }
+                          }
+                        }
+                      }
+                    },
+                    start: {
+                      1: {
+                        params: {
+                          type: "object",
+                          items: {
+                            items: { type: "enum", items: ["ALL"] }
+                          }
+                        },
+                        response: {
+                          type: "object",
+                          items: {
+                            success: { type: "boolean" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                Status: {
+                  methods: {
+                    rule_get: {
+                      1: {
+                        params: {
+                          type: "object",
+                          items: {
+                            items: { type: "enum", items: ["ALL"] }
+                          }
+                        },
+                        response: {
+                          type: "object",
+                          items: {
+                            isUpdating: { type: "boolean" },
+                            items: {
+                              type: "object",
+                              additionalProperties: {
+                                type: "object",
+                                items: {
+                                  action: { type: "string" },
+                                  category: { type: "string" },
+                                  id: { type: "string" },
+                                  method: { type: "string" },
+                                  severity: { type: "string" },
+                                  status: { type: "string" },
+                                  strId: { type: "string" },
+                                  update: { type: "string" }
+                                }
+                              }
+                            },
+                            success: { type: "boolean" }
+                          }
+                        }
+                      }
+                    },
+                    system_get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            items: {
+                              type: "object",
+                              items: {
+                                malware: SecurityScanStatusSystemGetItem,
+                                network: SecurityScanStatusSystemGetItem,
+                                systemCheck: SecurityScanStatusSystemGetItem,
+                                update: SecurityScanStatusSystemGetItem,
+                                userInfo: SecurityScanStatusSystemGetItem
+                              }
+                            },
+                            lastScanTime: { type: "string" },
+                            startTime: { type: "string" },
+                            success: { type: "boolean" },
+                            sysProgress: { type: "integer" },
+                            sysStatus: { type: "string" }
                           }
                         }
                       }

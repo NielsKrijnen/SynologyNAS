@@ -26,6 +26,7 @@ import { SYNO_Core_Promotion } from "$/services/SYNO/Core/Promotion"
 import { SYNO_Core_QuickConnect } from "$/services/SYNO/Core/QuickConnect"
 import { SYNO_Core_QuickStart } from "$/services/SYNO/Core/QuickStart"
 import { SYNO_Core_Security } from "$/services/SYNO/Core/Security"
+import { SYNO_Core_SecurityScan } from "$/services/SYNO/Core/SecurityScan"
 import { SYNO_Core_SNMP } from "$/services/SYNO/Core/SNMP"
 
 export class SYNO_Core {
@@ -137,6 +138,10 @@ export class SYNO_Core {
 
   get Security() {
     return new SYNO_Core_Security(this.client)
+  }
+
+  get SecurityScan() {
+    return new SYNO_Core_SecurityScan(this.client)
   }
 
   get SNMP() {
