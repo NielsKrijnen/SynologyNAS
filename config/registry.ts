@@ -2374,6 +2374,144 @@ export const registry: Registry = {
                 }
               }
             },
+            Security: {
+              apis: {
+                AutoBlock: {
+                  methods: {
+                    get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            attempts: { type: "integer" },
+                            enable: { type: "boolean" },
+                            expire_day: { type: "integer" },
+                            within_mins: { type: "integer" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                DoS: {
+                  methods: {
+                    get: {
+                      2: {
+                        params: {
+                          type: "object",
+                          optional: true,
+                          items: {
+                            configs: {
+                              type: "array",
+                              optional: true,
+                              items: {
+                                type: "object",
+                                items: {
+                                  adapter: { type: "string" }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        response: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            items: {
+                              adapter: { type: "string" },
+                              dos_protect_enable: { type: "boolean" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                DSM: {
+                  apis: {
+                    Embed: {
+                      methods: {
+                        get: {
+                          1: {
+                            response: {
+                              type: "object",
+                              items: {
+                                enable_block: { type: "boolean" },
+                                whitelist: { type: "array", items: { type: "string" } }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  methods: {
+                    get: {
+                      6: {
+                        response: {
+                          type: "object",
+                          items: {
+                            allow_2fa_device_lost_option: { type: "boolean" },
+                            allow_stay_signed_in_option: { type: "boolean" },
+                            allow_trust_device_2fa_option: { type: "boolean" },
+                            csp_header_option: { type: "boolean" },
+                            enable_csrf_protection: { type: "boolean" },
+                            restart_clean_session: { type: "boolean" },
+                            skip_ip_checking: { type: "boolean" },
+                            timeout: { type: "integer" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                Firewall: {
+                  apis: {
+                    Conf: {
+                      methods: {
+                        get: {
+                          1: {
+                            response: {
+                              type: "object",
+                              items: {
+                                enable_port_check: { type: "boolean" }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    Profile: {
+                      methods: {
+                        list: {
+                          1: {
+                            response: {
+                              type: "object",
+                              items: {
+                                profile_names: { type: "array", items: { type: "string" } }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  methods: {
+                    get: {
+                      1: {
+                        response: {
+                          type: "object",
+                          items: {
+                            enable_firewall: { type: "boolean" },
+                            profile_name: { type: "string" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
             SNMP: {
               methods: {
                 get: {
